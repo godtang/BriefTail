@@ -63,50 +63,7 @@ namespace BriefTail
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 FileName = ofd.FileName;
-                using (FileStream vFileStream = new FileStream(FileName,
-                    FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                {
-                    byte[] vBuffer = new byte[0x1000]; // 缓冲区
-                    int vReadLength; // 读取到的大小
-                    int vLineCount = 0; // 读取的行数
-                    int vReadCount = 0; // 读取的次数
-                    int vScanCount = 0; // 扫描过的字符数
-                    long vOffset = 0; // 向后读取的位置
-                    do
-                    {
-                        vOffset = vBuffer.Length * ++vReadCount;
-                        int vSpace = 0; // 偏移超出的空间
-                        if (vOffset >= vFileStream.Length) // 超出范围
-                        {
-                            vSpace = (int)(vOffset - vFileStream.Length);
-                            vOffset = vFileStream.Length;
-                        }
-                        vFileStream.Seek(-vOffset, SeekOrigin.End); //“SeekOrigin.End”反方向偏移读取位置
-
-                        vReadLength = vFileStream.Read(vBuffer, 0, vBuffer.Length - vSpace);
-                        #region 所读的缓冲里有多少行
-                        for (int i = vReadLength - 1; i >= 0; i--)
-                        {
-                            if (vBuffer[i] == 10)
-                            {
-                                if (vScanCount > 0) vLineCount++; // #13#10为回车换行
-                            }
-                            vScanCount++;
-                        }
-                        #endregion 所读的缓冲里有多少行
-                    } while (vReadLength >= vBuffer.Length
-                    && vOffset < vFileStream.Length
-                    && vLineCount < MaxLine * 2);
-
-                    if (vReadCount > 1) // 读的次数超过一次，则需重分配缓冲区
-                    {
-                        vBuffer = new byte[vScanCount];
-                        vFileStream.Seek(-vScanCount, SeekOrigin.End);
-                        vReadLength = vFileStream.Read(vBuffer, 0, vBuffer.Length);
-                    }
-                    FileSize = vFileStream.Length;
-                    TailBox.AppendText(Encoding.UTF8.GetString(vBuffer, vReadLength - vScanCount, vScanCount));
-                }
+                OpenFile();
             }
         }
 
@@ -118,6 +75,74 @@ namespace BriefTail
         private void TailBox_SizeChanged(object sender, EventArgs e)
         {
             ReCalcMaxLine();
+        }
+
+        private void TailBox_DragDrop(object sender, DragEventArgs e)
+        {
+            FileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            this.TailBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            OpenFile();
+        }
+
+        private void TailBox_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+                this.TailBox.Cursor = System.Windows.Forms.Cursors.Arrow;  //指定鼠标形状（更好看）
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void OpenFile()
+        {
+            using (FileStream vFileStream = new FileStream(FileName,
+                FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                byte[] vBuffer = new byte[0x1000]; // 缓冲区
+                int vReadLength; // 读取到的大小
+                int vLineCount = 0; // 读取的行数
+                int vReadCount = 0; // 读取的次数
+                int vScanCount = 0; // 扫描过的字符数
+                long vOffset = 0; // 向后读取的位置
+                do
+                {
+                    vOffset = vBuffer.Length * ++vReadCount;
+                    int vSpace = 0; // 偏移超出的空间
+                    if (vOffset >= vFileStream.Length) // 超出范围
+                    {
+                        vSpace = (int)(vOffset - vFileStream.Length);
+                        vOffset = vFileStream.Length;
+                    }
+                    vFileStream.Seek(-vOffset, SeekOrigin.End); //“SeekOrigin.End”反方向偏移读取位置
+
+                    vReadLength = vFileStream.Read(vBuffer, 0, vBuffer.Length - vSpace);
+                    #region 所读的缓冲里有多少行
+                    for (int i = vReadLength - 1; i >= 0; i--)
+                    {
+                        if (vBuffer[i] == 10)
+                        {
+                            if (vScanCount > 0) vLineCount++; // #13#10为回车换行
+                        }
+                        vScanCount++;
+                    }
+                    #endregion 所读的缓冲里有多少行
+                } while (vReadLength >= vBuffer.Length
+                && vOffset < vFileStream.Length
+                && vLineCount < MaxLine * 2);
+
+                if (vReadCount > 1) // 读的次数超过一次，则需重分配缓冲区
+                {
+                    vBuffer = new byte[vScanCount];
+                    vFileStream.Seek(-vScanCount, SeekOrigin.End);
+                    vReadLength = vFileStream.Read(vBuffer, 0, vBuffer.Length);
+                }
+                FileSize = vFileStream.Length;
+                TailBox.AppendText(Encoding.UTF8.GetString(vBuffer, vReadLength - vScanCount, vScanCount));
+            }
         }
     }
 }

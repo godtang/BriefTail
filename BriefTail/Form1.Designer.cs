@@ -90,6 +90,7 @@ namespace BriefTail
             // 
             // TailBox
             // 
+            this.TailBox.AllowDrop = true;
             this.TailBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -100,6 +101,8 @@ namespace BriefTail
             this.TailBox.Size = new System.Drawing.Size(776, 410);
             this.TailBox.TabIndex = 1;
             this.TailBox.SizeChanged += new System.EventHandler(this.TailBox_SizeChanged);
+            this.TailBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.TailBox_DragDrop);
+            this.TailBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.TailBox_DragEnter);
             // 
             // Form1
             // 

@@ -35,6 +35,7 @@ namespace BriefTail
             this.MenuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TailBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +65,7 @@ namespace BriefTail
             this.MenuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.MenuOpen.Size = new System.Drawing.Size(180, 22);
             this.MenuOpen.Text = "打开";
+            this.MenuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
             // MenuExit
             // 
@@ -86,11 +88,25 @@ namespace BriefTail
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.关于ToolStripMenuItem.Text = "关于";
             // 
+            // TailBox
+            // 
+            this.TailBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TailBox.Location = new System.Drawing.Point(12, 28);
+            this.TailBox.Multiline = true;
+            this.TailBox.Name = "TailBox";
+            this.TailBox.ReadOnly = true;
+            this.TailBox.Size = new System.Drawing.Size(776, 410);
+            this.TailBox.TabIndex = 1;
+            this.TailBox.SizeChanged += new System.EventHandler(this.TailBox_SizeChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.TailBox);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -110,6 +126,7 @@ namespace BriefTail
         private System.Windows.Forms.ToolStripMenuItem MenuExit;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
+        private System.Windows.Forms.TextBox TailBox;
     }
 }
 

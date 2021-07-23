@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BriefTail", "BriefTail\BriefTail.csproj", "{96AF7F44-6CD1-44F6-B877-9B9A7D831170}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96AF7F44-6CD1-44F6-B877-9B9A7D831170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96AF7F44-6CD1-44F6-B877-9B9A7D831170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96AF7F44-6CD1-44F6-B877-9B9A7D831170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96AF7F44-6CD1-44F6-B877-9B9A7D831170}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {183D72D5-AC12-4F2E-9325-8D0F84B75C0F}
+	EndGlobalSection
+EndGlobal

@@ -29,7 +29,7 @@ namespace BriefTail
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-            if (FileName != "")
+            if (FileName != "" && File.Exists(FileName))
             {
                 using (FileStream fileStream = new FileStream(FileName,
                     FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -99,6 +99,12 @@ namespace BriefTail
 
         private void OpenFile()
         {
+            if (!File.Exists(FileName))
+            {
+                MessageBox.Show("文件不存在！");
+                return;
+            }
+
             using (FileStream vFileStream = new FileStream(FileName,
                 FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {

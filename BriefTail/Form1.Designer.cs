@@ -33,10 +33,10 @@ namespace BriefTail
             this.MenuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HighlightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TailBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +46,7 @@ namespace BriefTail
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuFile,
             this.OptionToolStripMenuItem,
-            this.帮助ToolStripMenuItem});
+            this.HelpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 25);
@@ -66,7 +66,7 @@ namespace BriefTail
             // 
             this.MenuOpen.Name = "MenuOpen";
             this.MenuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.MenuOpen.Size = new System.Drawing.Size(180, 22);
+            this.MenuOpen.Size = new System.Drawing.Size(147, 22);
             this.MenuOpen.Text = "打开";
             this.MenuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
@@ -74,22 +74,8 @@ namespace BriefTail
             // 
             this.MenuExit.Name = "MenuExit";
             this.MenuExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.MenuExit.Size = new System.Drawing.Size(180, 22);
+            this.MenuExit.Size = new System.Drawing.Size(147, 22);
             this.MenuExit.Text = "退出";
-            // 
-            // 帮助ToolStripMenuItem
-            // 
-            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.关于ToolStripMenuItem});
-            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.帮助ToolStripMenuItem.Text = "帮助";
-            // 
-            // 关于ToolStripMenuItem
-            // 
-            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.关于ToolStripMenuItem.Text = "关于";
             // 
             // OptionToolStripMenuItem
             // 
@@ -102,8 +88,23 @@ namespace BriefTail
             // HighlightToolStripMenuItem
             // 
             this.HighlightToolStripMenuItem.Name = "HighlightToolStripMenuItem";
-            this.HighlightToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.HighlightToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.HighlightToolStripMenuItem.Text = "高亮";
+            this.HighlightToolStripMenuItem.Click += new System.EventHandler(this.HighlightToolStripMenuItem_Click);
+            // 
+            // HelpToolStripMenuItem
+            // 
+            this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutToolStripMenuItem});
+            this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
+            this.HelpToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.HelpToolStripMenuItem.Text = "帮助";
+            // 
+            // AboutToolStripMenuItem
+            // 
+            this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AboutToolStripMenuItem.Text = "关于";
             // 
             // TailBox
             // 
@@ -113,6 +114,7 @@ namespace BriefTail
             this.TailBox.Location = new System.Drawing.Point(12, 28);
             this.TailBox.Name = "TailBox";
             this.TailBox.ReadOnly = true;
+            this.TailBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.TailBox.Size = new System.Drawing.Size(776, 410);
             this.TailBox.TabIndex = 1;
             this.TailBox.Text = "";
@@ -140,8 +142,8 @@ namespace BriefTail
         private System.Windows.Forms.ToolStripMenuItem MenuFile;
         private System.Windows.Forms.ToolStripMenuItem MenuOpen;
         private System.Windows.Forms.ToolStripMenuItem MenuExit;
-        private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OptionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HighlightToolStripMenuItem;
         private System.Windows.Forms.RichTextBox TailBox;

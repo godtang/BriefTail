@@ -22,9 +22,15 @@ namespace BriefTail
         private void addButton_Click(object sender, EventArgs e)
         {
             Configuration conf = new Configuration();
-            conf.Location = new Point(1, 20 * Count);
+            conf.Delete += Conf_Delete;
             flowLayoutPanel1.Controls.Add(conf);
             Count++;
+        }
+
+        private void Conf_Delete(object sender)
+        {
+            Configuration conf = sender as Configuration;
+            flowLayoutPanel1.Controls.Remove(conf);
         }
     }
 }

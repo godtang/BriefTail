@@ -10,8 +10,15 @@ using System.Windows.Forms;
 
 namespace BriefTail
 {
+    public delegate void DeleteEventHandler(object sender);
+
     public partial class Configuration : UserControl
     {
+        public string MatchText { get { return text.Text; } }
+        public Color ShowColor { get { return btnColor.BackColor; } }
+
+        public event DeleteEventHandler Delete;
+
         public Configuration()
         {
             InitializeComponent();
@@ -28,7 +35,9 @@ namespace BriefTail
             }
         }
 
-        public string MatchText { get { return text.Text; } }
-        public Color ShowColor { get { return btnColor.BackColor; } }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            Delete?.Invoke(this);
+        }
     }
 }

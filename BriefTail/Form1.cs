@@ -138,7 +138,7 @@ namespace BriefTail
 
                 foreach (var line in appendText)
                 {
-                    AppendText(line, Color.Blue);
+                    AppendText(line);
                 }
 
                 CurrentPosition = fileStream.Length;
@@ -148,6 +148,19 @@ namespace BriefTail
 
         private void HighlightToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void AppendText(string text)
+        {
+            if (!Highlight(text))
+            {
+                TailBox.AppendText(text);
+            }
+            else
+            {
+                AppendText(text, Color.Red);
+            }
         }
 
         private void AppendText(string text, Color color)
@@ -158,6 +171,11 @@ namespace BriefTail
             TailBox.SelectionColor = color;
             TailBox.AppendText(text);
             TailBox.SelectionColor = TailBox.ForeColor;
+        }
+
+        private bool Highlight(string text)
+        {
+            return true;
         }
 
         private void LimitLines(int maxLine)
@@ -173,13 +191,6 @@ namespace BriefTail
                 TailBox.ReadOnly = true;
                 return;
             }
-
-            //if (TailBox.Lines.Length > maxLine)
-            //{
-            //    string[] lines = new string[maxLine];
-            //    Array.Copy(TailBox.Lines, TailBox.Lines.Length - maxLine, lines, 0, maxLine);
-            //    TailBox.Lines = lines;
-            //}
         }
     }
 }

@@ -177,7 +177,8 @@ namespace BriefTail
 
         private void HighlightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            HighlightConfig dialog = new HighlightConfig();
+            dialog.ShowDialog();
         }
 
         private void AppendText(string text)

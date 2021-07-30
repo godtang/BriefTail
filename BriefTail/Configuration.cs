@@ -24,11 +24,11 @@ namespace BriefTail
             {
                 Color GetColor = ColorForm.Color;
                 //GetColor就是用户选择的颜色，接下来就可以使用该颜色了
-                color.BackColor = GetColor;
+                btnColor.BackColor = GetColor;
             }
         }
 
         public string MatchText { get { return text.Text; } }
-        public Color ShowColor { get { return color.BackColor; } }
+        public Color ShowColor { get { return btnColor.BackColor; } }
     }
 }

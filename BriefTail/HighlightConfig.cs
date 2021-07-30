@@ -22,8 +22,8 @@ namespace BriefTail
         private void addButton_Click(object sender, EventArgs e)
         {
             Configuration conf = new Configuration();
-            conf.Location = new Point(10, 25 * Count);
-            this.Controls.Add(conf);
+            conf.Location = new Point(1, 20 * Count);
+            flowLayoutPanel1.Controls.Add(conf);
             Count++;
         }
     }

@@ -30,34 +30,49 @@ namespace BriefTail
         private void InitializeComponent()
         {
             this.text = new System.Windows.Forms.TextBox();
-            this.color = new System.Windows.Forms.Button();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // text
             // 
             this.text.Location = new System.Drawing.Point(3, 3);
+            this.text.Margin = new System.Windows.Forms.Padding(1);
             this.text.Name = "text";
             this.text.Size = new System.Drawing.Size(200, 21);
             this.text.TabIndex = 0;
             // 
-            // color
+            // btnColor
             // 
-            this.color.Location = new System.Drawing.Point(232, 3);
-            this.color.Name = "color";
-            this.color.Size = new System.Drawing.Size(75, 23);
-            this.color.TabIndex = 1;
-            this.color.Text = "颜色";
-            this.color.UseVisualStyleBackColor = true;
-            this.color.Click += new System.EventHandler(this.color_Click);
+            this.btnColor.Location = new System.Drawing.Point(209, 3);
+            this.btnColor.Margin = new System.Windows.Forms.Padding(1);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(75, 23);
+            this.btnColor.TabIndex = 1;
+            this.btnColor.Text = "颜色";
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.color_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(290, 3);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(1);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "删除";
+            this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.color);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnColor);
             this.Controls.Add(this.text);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Configuration";
-            this.Size = new System.Drawing.Size(310, 26);
+            this.Size = new System.Drawing.Size(370, 25);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -66,6 +81,7 @@ namespace BriefTail
         #endregion
 
         private System.Windows.Forms.TextBox text;
-        private System.Windows.Forms.Button color;
+        private System.Windows.Forms.Button btnColor;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

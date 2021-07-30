@@ -27,5 +27,8 @@ namespace BriefTail
                 color.BackColor = GetColor;
             }
         }
+
+        public string MatchText { get { return text.Text; } }
+        public Color ShowColor { get { return color.BackColor; } }
     }
 }

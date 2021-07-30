@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +18,8 @@ namespace BriefTail
         private string FileName = "";
         private const int MaxLine = 100;
         private long CurrentPosition = 0;
+        private Dictionary<string, Color> HighlightDict = new Dictionary<string, Color>();
+        private JToken ConfigRoot { get; set; }
 
         public Form1()
         {
@@ -27,6 +31,31 @@ namespace BriefTail
             TailBox.AllowDrop = true;
             TailBox.DragDrop += TailBox_DragDrop;
             TailBox.DragEnter += TailBox_DragEnter;
+            InitHighlight();
+        }
+
+        private void InitHighlight()
+        {
+            string file = Path.GetDirectoryName(Assembly.GetAssembly(typeof(Form1)).Location);
+            file = Path.Combine(file, "highlight.json");
+
+            if (!File.Exists(file))
+            {
+                ConfigRoot = JToken.Parse("{}");
+            }
+            else
+            {
+                var text = File.ReadAllText(file, Encoding.UTF8);
+                ConfigRoot = JToken.Parse(text);
+            }
+
+            foreach (var item in ConfigRoot)
+            {
+                JProperty temp = item as JProperty;
+                HighlightDict[temp.Name.ToString()] = Color.FromArgb((int)temp.Value);
+            }
+
+            SortHighlightTable();
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
@@ -153,13 +182,20 @@ namespace BriefTail
 
         private void AppendText(string text)
         {
-            if (!Highlight(text))
+            bool find = false;
+            foreach (string key in HighlightDict.Keys)
+            {
+                if (text.IndexOf(key) >= 0)
+                {
+                    find = true;
+                    Color c = HighlightDict[key];
+                    AppendText(text, c);
+                    break;
+                }
+            }
+            if (!find)
             {
                 TailBox.AppendText(text);
-            }
-            else
-            {
-                AppendText(text, Color.Red);
             }
         }
 
@@ -171,11 +207,6 @@ namespace BriefTail
             TailBox.SelectionColor = color;
             TailBox.AppendText(text);
             TailBox.SelectionColor = TailBox.ForeColor;
-        }
-
-        private bool Highlight(string text)
-        {
-            return true;
         }
 
         private void LimitLines(int maxLine)
@@ -191,6 +222,17 @@ namespace BriefTail
                 TailBox.ReadOnly = true;
                 return;
             }
+        }
+
+        private void SortHighlightTable()
+        {
+            var dicSort = from objDic in HighlightDict orderby objDic.Key.Length descending select objDic;
+            Dictionary<string, Color> tempDict = new Dictionary<string, Color>();
+            foreach (KeyValuePair<string, Color> kvp in dicSort)
+            {
+                tempDict[kvp.Key] = kvp.Value;
+            }
+            HighlightDict = tempDict;
         }
     }
 }

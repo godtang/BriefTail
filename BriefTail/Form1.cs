@@ -16,7 +16,7 @@ namespace BriefTail
     public partial class Form1 : Form
     {
         private string FileName = "";
-        private const int MaxLine = 100;
+        private const int MaxLine = 1000;
         private long CurrentPosition = 0;
         private Dictionary<string, Color> HighlightDict = new Dictionary<string, Color>();
         private JToken ConfigRoot { get; set; }

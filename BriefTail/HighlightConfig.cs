@@ -60,5 +60,10 @@ namespace BriefTail
             HighlightConf?.Invoke(this, highlightDict);
             Close();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

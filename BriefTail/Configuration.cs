@@ -14,8 +14,22 @@ namespace BriefTail
 
     public partial class Configuration : UserControl
     {
-        public string MatchText { get { return text.Text; } }
-        public Color ShowColor { get { return btnColor.BackColor; } }
+        public string MatchText
+        {
+            get { return text.Text; }
+            set { text.Text = value; }
+        }
+        public Color ShowColor
+        {
+            get
+            {
+                return btnColor.BackColor;
+            }
+            set
+            {
+                btnColor.BackColor = value;
+            }
+        }
 
         public event DeleteEventHandler Delete;
 

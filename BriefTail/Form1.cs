@@ -20,6 +20,7 @@ namespace BriefTail
         private long CurrentPosition = 0;
         private Dictionary<string, Color> HighlightDict = new Dictionary<string, Color>();
         private JToken ConfigRoot { get; set; }
+        private string ConfigFile = "";
 
         public Form1()
         {
@@ -31,21 +32,24 @@ namespace BriefTail
             TailBox.AllowDrop = true;
             TailBox.DragDrop += TailBox_DragDrop;
             TailBox.DragEnter += TailBox_DragEnter;
+
+
+            ConfigFile = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetAssembly(typeof(Form1)).Location),
+                "highlight.json");
             InitHighlight();
         }
 
         private void InitHighlight()
         {
-            string file = Path.GetDirectoryName(Assembly.GetAssembly(typeof(Form1)).Location);
-            file = Path.Combine(file, "highlight.json");
 
-            if (!File.Exists(file))
+            if (!File.Exists(ConfigFile))
             {
                 ConfigRoot = JToken.Parse("{}");
             }
             else
             {
-                var text = File.ReadAllText(file, Encoding.UTF8);
+                var text = File.ReadAllText(ConfigFile, Encoding.UTF8);
                 ConfigRoot = JToken.Parse(text);
             }
 
@@ -183,7 +187,7 @@ namespace BriefTail
 
         private void HighlightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HighlightConfig dialog = new HighlightConfig();
+            HighlightConfig dialog = new HighlightConfig(HighlightDict);
             dialog.HighlightConf += Dialog_HighlightConf;
             dialog.ShowDialog();
         }
@@ -192,6 +196,7 @@ namespace BriefTail
         {
             HighlightDict = dict;
             RefreshHighlight();
+            SaveConfig();
         }
 
         private void RefreshHighlight()
@@ -264,6 +269,16 @@ namespace BriefTail
                 tempDict[kvp.Key] = kvp.Value;
             }
             HighlightDict = tempDict;
+        }
+
+        private void SaveConfig()
+        {
+            ConfigRoot = JToken.Parse("{}");
+            foreach (var item in HighlightDict)
+            {
+                ConfigRoot[item.Key] = item.Value.ToArgb();
+            }
+            File.WriteAllText(ConfigFile, ConfigRoot.ToString(), new System.Text.UTF8Encoding(false));
         }
     }
 }

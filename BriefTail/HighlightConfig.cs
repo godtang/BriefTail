@@ -15,10 +15,20 @@ namespace BriefTail
     public partial class HighlightConfig : Form
     {
         public event HighlightConfEventHandler HighlightConf;
+        private Dictionary<string, Color> HighlightDict = new Dictionary<string, Color>();
 
-        public HighlightConfig()
+        public HighlightConfig(Dictionary<string, Color> highlightDict)
         {
             InitializeComponent();
+            HighlightDict = highlightDict;
+            foreach (var item in HighlightDict)
+            {
+                Configuration conf = new Configuration();
+                conf.Delete += Conf_Delete;
+                conf.MatchText = item.Key;
+                conf.ShowColor = item.Value;
+                flowLayoutPanel1.Controls.Add(conf);
+            }
         }
 
         private void addButton_Click(object sender, EventArgs e)

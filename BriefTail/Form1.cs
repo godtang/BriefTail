@@ -165,10 +165,16 @@ namespace BriefTail
                     appendText = read.Split('\n');
                 }
 
-                foreach (var line in appendText)
+                for (int i = 0; i < appendText.Length; i++)
                 {
+                    string line = appendText[i];
+                    if (i != appendText.Length - 1)
+                    {
+                        line = line + "\n";
+                    }
                     AppendText(line);
                 }
+
 
                 CurrentPosition = fileStream.Length;
 
@@ -178,7 +184,31 @@ namespace BriefTail
         private void HighlightToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HighlightConfig dialog = new HighlightConfig();
+            dialog.HighlightConf += Dialog_HighlightConf;
             dialog.ShowDialog();
+        }
+
+        private void Dialog_HighlightConf(object sender, Dictionary<string, Color> dict)
+        {
+            HighlightDict = dict;
+            RefreshHighlight();
+        }
+
+        private void RefreshHighlight()
+        {
+            string all = TailBox.Text;
+            TailBox.Clear();
+            string[] appendText = all.Split('\n');
+
+            for (int i = 0; i < appendText.Length; i++)
+            {
+                string line = appendText[i];
+                if (i != appendText.Length - 1)
+                {
+                    line = line + "\n";
+                }
+                AppendText(line);
+            }
         }
 
         private void AppendText(string text)

@@ -31,6 +31,7 @@ namespace BriefTail
         {
             this.addButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addButton
@@ -52,11 +53,22 @@ namespace BriefTail
             this.flowLayoutPanel1.Size = new System.Drawing.Size(400, 106);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
+            // btnOK
+            // 
+            this.btnOK.Location = new System.Drawing.Point(297, 397);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.TabIndex = 2;
+            this.btnOK.Text = "确定";
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
             // HighlightConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 450);
+            this.Controls.Add(this.btnOK);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.addButton);
             this.MaximizeBox = false;
@@ -71,5 +83,6 @@ namespace BriefTail
 
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnOK;
     }
 }

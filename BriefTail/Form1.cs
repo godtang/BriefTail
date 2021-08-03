@@ -38,9 +38,11 @@ namespace BriefTail
 
             ConfigFile = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetAssembly(typeof(Form1)).Location),
-                "highlight.json");
+                "config.json");
             InitHighlight();
             context_ = SynchronizationContext.Current;
+            FileName = ConfigRoot["fileHistory"].ToString();
+            ShowFile();
         }
 
         private void InitHighlight()
@@ -56,7 +58,8 @@ namespace BriefTail
                 ConfigRoot = JToken.Parse(text);
             }
 
-            foreach (var item in ConfigRoot)
+            var highlight = ConfigRoot["highlight"];
+            foreach (var item in highlight)
             {
                 JProperty temp = item as JProperty;
                 HighlightDict[temp.Name.ToString()] = Color.FromArgb((int)temp.Value);
@@ -93,6 +96,8 @@ namespace BriefTail
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 FileName = ofd.FileName;
+                ConfigRoot["fileHistory"] = FileName;
+                SaveConfig();
                 CurrentPosition = 0;
                 ShowFile();
             }
@@ -105,6 +110,8 @@ namespace BriefTail
         private void TailBox_DragDrop(object sender, DragEventArgs e)
         {
             FileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            ConfigRoot["fileHistory"] = FileName;
+            SaveConfig();
             this.TailBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             CurrentPosition = 0;
             ShowFile();
@@ -127,7 +134,8 @@ namespace BriefTail
         {
             if (!File.Exists(FileName))
             {
-                MessageBox.Show("文件不存在！");
+                //MessageBox.Show("文件不存在！");
+                Console.WriteLine("文件不存在！");
                 return;
             }
 
@@ -292,10 +300,9 @@ namespace BriefTail
 
         private void SaveConfig()
         {
-            ConfigRoot = JToken.Parse("{}");
             foreach (var item in HighlightDict)
             {
-                ConfigRoot[item.Key] = item.Value.ToArgb();
+                ConfigRoot["highlight"][item.Key] = item.Value.ToArgb();
             }
             File.WriteAllText(ConfigFile, ConfigRoot.ToString(), new System.Text.UTF8Encoding(false));
         }

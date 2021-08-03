@@ -17,7 +17,8 @@ namespace BriefTail
     public partial class Form1 : Form
     {
         private string FileName = "";
-        private const int MaxLine = 1000;
+        private const int OpenMaxLine = 100;
+        private const int TailMaxLine = 1000;
         private long CurrentPosition = 0;
         private Dictionary<string, Color> HighlightDict = new Dictionary<string, Color>();
         private JToken ConfigRoot { get; set; }
@@ -74,7 +75,7 @@ namespace BriefTail
             {
                 if (FileName != "" && File.Exists(FileName))
                 {
-                    LimitLines(MaxLine);
+                    LimitLines(TailMaxLine);
                     ShowFile();
                 }
                 else
@@ -172,7 +173,7 @@ namespace BriefTail
                         {
                             lineCount++;
                         }
-                        if (lineCount > MaxLine)
+                        if (lineCount > OpenMaxLine)
                         {
                             break;
                         }

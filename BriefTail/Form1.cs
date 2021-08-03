@@ -148,7 +148,14 @@ namespace BriefTail
                         {
                             break;
                         }
-                        fileStream.Seek(-2, SeekOrigin.Current);
+                        if (1 == fileStream.Position)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            fileStream.Seek(-2, SeekOrigin.Current);
+                        }
                     }
                     while (-1 != b);
 

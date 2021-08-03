@@ -23,14 +23,14 @@ namespace BriefTail
         private JToken ConfigRoot { get; set; }
         private string ConfigFile = "";
         private SynchronizationContext context_;
+        System.Windows.Forms.Timer RefreshTimer = new System.Windows.Forms.Timer();
 
         public Form1()
         {
             InitializeComponent();
-            System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();
-            refreshTimer.Tick += RefreshTimer_Tick;
-            refreshTimer.Interval = 500;
-            refreshTimer.Start();
+            RefreshTimer.Tick += RefreshTimer_Tick;
+            RefreshTimer.Interval = 500;
+            RefreshTimer.Start();
             TailBox.AllowDrop = true;
             TailBox.DragDrop += TailBox_DragDrop;
             TailBox.DragEnter += TailBox_DragEnter;
@@ -298,6 +298,19 @@ namespace BriefTail
                 ConfigRoot[item.Key] = item.Value.ToArgb();
             }
             File.WriteAllText(ConfigFile, ConfigRoot.ToString(), new System.Text.UTF8Encoding(false));
+        }
+
+        private void PauseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PauseToolStripMenuItem.Checked = !PauseToolStripMenuItem.Checked;
+            if (PauseToolStripMenuItem.Checked)
+            {
+                RefreshTimer.Stop();
+            }
+            else
+            {
+                RefreshTimer.Start();
+            }
         }
     }
 }

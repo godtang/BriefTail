@@ -38,6 +38,7 @@ namespace BriefTail
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TailBox = new System.Windows.Forms.RichTextBox();
+            this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +81,8 @@ namespace BriefTail
             // OptionToolStripMenuItem
             // 
             this.OptionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.HighlightToolStripMenuItem});
+            this.HighlightToolStripMenuItem,
+            this.PauseToolStripMenuItem});
             this.OptionToolStripMenuItem.Name = "OptionToolStripMenuItem";
             this.OptionToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.OptionToolStripMenuItem.Text = "选项";
@@ -88,7 +90,7 @@ namespace BriefTail
             // HighlightToolStripMenuItem
             // 
             this.HighlightToolStripMenuItem.Name = "HighlightToolStripMenuItem";
-            this.HighlightToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.HighlightToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.HighlightToolStripMenuItem.Text = "高亮";
             this.HighlightToolStripMenuItem.Click += new System.EventHandler(this.HighlightToolStripMenuItem_Click);
             // 
@@ -119,6 +121,13 @@ namespace BriefTail
             this.TailBox.TabIndex = 1;
             this.TailBox.Text = "";
             // 
+            // PauseToolStripMenuItem
+            // 
+            this.PauseToolStripMenuItem.Name = "PauseToolStripMenuItem";
+            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PauseToolStripMenuItem.Text = "暂停";
+            this.PauseToolStripMenuItem.Click += new System.EventHandler(this.PauseToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -147,6 +156,7 @@ namespace BriefTail
         private System.Windows.Forms.ToolStripMenuItem OptionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HighlightToolStripMenuItem;
         private System.Windows.Forms.RichTextBox TailBox;
+        private System.Windows.Forms.ToolStripMenuItem PauseToolStripMenuItem;
     }
 }
 

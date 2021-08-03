@@ -202,6 +202,7 @@ namespace BriefTail
         private void Dialog_HighlightConf(object sender, Dictionary<string, Color> dict)
         {
             HighlightDict = dict;
+            SortHighlightTable();
             RefreshHighlight();
             SaveConfig();
         }

@@ -95,11 +95,16 @@ namespace BriefTail
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                FileName = ofd.FileName;
-                ConfigRoot["fileHistory"] = FileName;
-                SaveConfig();
-                CurrentPosition = 0;
-                ShowFile();
+                if (FileName != ofd.FileName)
+                {
+                    TailBox.Clear();
+                    CurrentPosition = 0;
+                    FileName = ofd.FileName;
+                    ConfigRoot["fileHistory"] = FileName;
+                    SaveConfig();
+                    CurrentPosition = 0;
+                    ShowFile();
+                }
             }
         }
 
@@ -109,12 +114,16 @@ namespace BriefTail
 
         private void TailBox_DragDrop(object sender, DragEventArgs e)
         {
-            FileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-            ConfigRoot["fileHistory"] = FileName;
-            SaveConfig();
-            this.TailBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            CurrentPosition = 0;
-            ShowFile();
+            if (FileName != ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString())
+            {
+                TailBox.Clear();
+                CurrentPosition = 0;
+                FileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+                ConfigRoot["fileHistory"] = FileName;
+                SaveConfig();
+                this.TailBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+                ShowFile();
+            }
         }
 
         private void TailBox_DragEnter(object sender, DragEventArgs e)

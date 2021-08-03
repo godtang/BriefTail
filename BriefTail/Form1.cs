@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,11 +22,12 @@ namespace BriefTail
         private Dictionary<string, Color> HighlightDict = new Dictionary<string, Color>();
         private JToken ConfigRoot { get; set; }
         private string ConfigFile = "";
+        private SynchronizationContext context_;
 
         public Form1()
         {
             InitializeComponent();
-            Timer refreshTimer = new Timer();
+            System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();
             refreshTimer.Tick += RefreshTimer_Tick;
             refreshTimer.Interval = 500;
             refreshTimer.Start();
@@ -38,6 +40,7 @@ namespace BriefTail
                 Path.GetDirectoryName(Assembly.GetAssembly(typeof(Form1)).Location),
                 "highlight.json");
             InitHighlight();
+            context_ = SynchronizationContext.Current;
         }
 
         private void InitHighlight()
@@ -64,11 +67,19 @@ namespace BriefTail
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-            if (FileName != "" && File.Exists(FileName))
+            context_.Post((object status) =>
             {
-                LimitLines(MaxLine);
-                ShowFile();
-            }
+                if (FileName != "" && File.Exists(FileName))
+                {
+                    LimitLines(MaxLine);
+                    ShowFile();
+                }
+                else
+                {
+                    TailBox.Clear();
+                    CurrentPosition = 0;
+                }
+            }, null);
         }
 
         private void MenuOpen_Click(object sender, EventArgs e)

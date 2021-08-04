@@ -44,6 +44,7 @@ namespace BriefTail
             context_ = SynchronizationContext.Current;
             FileName = ConfigRoot["fileHistory"].ToString();
             ShowFile();
+            TailBox.HideSelection = false;
         }
 
         private void InitHighlight()
@@ -289,8 +290,6 @@ namespace BriefTail
                 TailBox.ReadOnly = false;
                 TailBox.Select(0, TailBox.GetFirstCharIndexFromLine(TailBox.Lines.Length - maxLine));
                 TailBox.SelectedText = "";
-                TailBox.Select(TailBox.TextLength, 0);
-                TailBox.Focus();
                 TailBox.Refresh();
                 TailBox.ReadOnly = true;
                 return;

@@ -328,5 +328,10 @@ namespace BriefTail
                 RefreshTimer.Start();
             }
         }
+
+        private void ClearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TailBox.Clear();
+        }
     }
 }

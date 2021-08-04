@@ -35,10 +35,11 @@ namespace BriefTail
             this.MenuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.OptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HighlightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TailBox = new System.Windows.Forms.RichTextBox();
-            this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +83,8 @@ namespace BriefTail
             // 
             this.OptionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HighlightToolStripMenuItem,
-            this.PauseToolStripMenuItem});
+            this.PauseToolStripMenuItem,
+            this.ClearToolStripMenuItem});
             this.OptionToolStripMenuItem.Name = "OptionToolStripMenuItem";
             this.OptionToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.OptionToolStripMenuItem.Text = "选项";
@@ -93,6 +95,13 @@ namespace BriefTail
             this.HighlightToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.HighlightToolStripMenuItem.Text = "高亮";
             this.HighlightToolStripMenuItem.Click += new System.EventHandler(this.HighlightToolStripMenuItem_Click);
+            // 
+            // PauseToolStripMenuItem
+            // 
+            this.PauseToolStripMenuItem.Name = "PauseToolStripMenuItem";
+            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PauseToolStripMenuItem.Text = "暂停";
+            this.PauseToolStripMenuItem.Click += new System.EventHandler(this.PauseToolStripMenuItem_Click);
             // 
             // HelpToolStripMenuItem
             // 
@@ -121,12 +130,12 @@ namespace BriefTail
             this.TailBox.TabIndex = 1;
             this.TailBox.Text = "";
             // 
-            // PauseToolStripMenuItem
+            // ClearToolStripMenuItem
             // 
-            this.PauseToolStripMenuItem.Name = "PauseToolStripMenuItem";
-            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.PauseToolStripMenuItem.Text = "暂停";
-            this.PauseToolStripMenuItem.Click += new System.EventHandler(this.PauseToolStripMenuItem_Click);
+            this.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem";
+            this.ClearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ClearToolStripMenuItem.Text = "清除";
+            this.ClearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -157,6 +166,7 @@ namespace BriefTail
         private System.Windows.Forms.ToolStripMenuItem HighlightToolStripMenuItem;
         private System.Windows.Forms.RichTextBox TailBox;
         private System.Windows.Forms.ToolStripMenuItem PauseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ClearToolStripMenuItem;
     }
 }
 

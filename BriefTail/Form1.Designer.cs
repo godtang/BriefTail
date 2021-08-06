@@ -29,6 +29,7 @@ namespace BriefTail
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MenuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,10 +37,10 @@ namespace BriefTail
             this.OptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HighlightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TailBox = new System.Windows.Forms.RichTextBox();
-            this.ClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,16 +93,23 @@ namespace BriefTail
             // HighlightToolStripMenuItem
             // 
             this.HighlightToolStripMenuItem.Name = "HighlightToolStripMenuItem";
-            this.HighlightToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.HighlightToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.HighlightToolStripMenuItem.Text = "高亮";
             this.HighlightToolStripMenuItem.Click += new System.EventHandler(this.HighlightToolStripMenuItem_Click);
             // 
             // PauseToolStripMenuItem
             // 
             this.PauseToolStripMenuItem.Name = "PauseToolStripMenuItem";
-            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.PauseToolStripMenuItem.Text = "暂停";
             this.PauseToolStripMenuItem.Click += new System.EventHandler(this.PauseToolStripMenuItem_Click);
+            // 
+            // ClearToolStripMenuItem
+            // 
+            this.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem";
+            this.ClearToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.ClearToolStripMenuItem.Text = "清除";
+            this.ClearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
             // HelpToolStripMenuItem
             // 
@@ -130,13 +138,6 @@ namespace BriefTail
             this.TailBox.TabIndex = 1;
             this.TailBox.Text = "";
             // 
-            // ClearToolStripMenuItem
-            // 
-            this.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem";
-            this.ClearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ClearToolStripMenuItem.Text = "清除";
-            this.ClearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -144,6 +145,7 @@ namespace BriefTail
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.TailBox);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "BriefTail";

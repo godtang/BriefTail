@@ -69,7 +69,7 @@ namespace BriefTail
             // 
             this.MenuOpen.Name = "MenuOpen";
             this.MenuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.MenuOpen.Size = new System.Drawing.Size(147, 22);
+            this.MenuOpen.Size = new System.Drawing.Size(180, 22);
             this.MenuOpen.Text = "打开";
             this.MenuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
@@ -77,7 +77,7 @@ namespace BriefTail
             // 
             this.MenuExit.Name = "MenuExit";
             this.MenuExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.MenuExit.Size = new System.Drawing.Size(147, 22);
+            this.MenuExit.Size = new System.Drawing.Size(180, 22);
             this.MenuExit.Text = "退出";
             // 
             // OptionToolStripMenuItem
@@ -93,21 +93,25 @@ namespace BriefTail
             // HighlightToolStripMenuItem
             // 
             this.HighlightToolStripMenuItem.Name = "HighlightToolStripMenuItem";
-            this.HighlightToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.HighlightToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+            this.HighlightToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.HighlightToolStripMenuItem.Text = "高亮";
             this.HighlightToolStripMenuItem.Click += new System.EventHandler(this.HighlightToolStripMenuItem_Click);
             // 
             // PauseToolStripMenuItem
             // 
             this.PauseToolStripMenuItem.Name = "PauseToolStripMenuItem";
-            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.PauseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.PauseToolStripMenuItem.Text = "暂停";
             this.PauseToolStripMenuItem.Click += new System.EventHandler(this.PauseToolStripMenuItem_Click);
             // 
             // ClearToolStripMenuItem
             // 
             this.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem";
-            this.ClearToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.ClearToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            | System.Windows.Forms.Keys.C)));
+            this.ClearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ClearToolStripMenuItem.Text = "清除";
             this.ClearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
@@ -127,8 +131,8 @@ namespace BriefTail
             // 
             // TailBox
             // 
-            this.TailBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.TailBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TailBox.Location = new System.Drawing.Point(12, 28);
             this.TailBox.Name = "TailBox";

@@ -292,6 +292,8 @@ namespace BriefTail
                 TailBox.SelectedText = "";
                 TailBox.Refresh();
                 TailBox.ReadOnly = true;
+                TailBox.Select(TailBox.TextLength, 0);
+                TailBox.ScrollToCaret();
                 return;
             }
         }

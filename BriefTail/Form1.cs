@@ -128,6 +128,7 @@ namespace BriefTail
                 if (FileName != ofd.FileName)
                 {
                     TailBox.Clear();
+                    JSonView.Rows.Clear();
                     CurrentPosition = 0;
                     FileName = ofd.FileName;
                     ConfigRoot["fileHistory"] = FileName;
@@ -382,6 +383,7 @@ namespace BriefTail
                 TailBox.Visible = true;
                 JSonView.Visible = false;
             }
+            CurrentPosition = 0;
             ShowFile();
         }
 

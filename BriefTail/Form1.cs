@@ -348,7 +348,7 @@ namespace BriefTail
 
         private string AnalyzeJson(string src)
         {
-            string result = "";
+            string result;
             try
             {
                 JToken token = JToken.Parse(src);

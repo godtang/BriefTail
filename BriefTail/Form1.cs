@@ -25,7 +25,9 @@ namespace BriefTail
         private string ConfigFile = "";
         private SynchronizationContext context_;
         System.Windows.Forms.Timer RefreshTimer = new System.Windows.Forms.Timer();
+
         private bool JSonModule = false;
+        private DataGridView JSonView = new DataGridView();
 
         public Form1()
         {
@@ -36,7 +38,32 @@ namespace BriefTail
             TailBox.AllowDrop = true;
             TailBox.DragDrop += TailBox_DragDrop;
             TailBox.DragEnter += TailBox_DragEnter;
+            #region json初始化
+            JSonView.Visible = false;
+            JSonView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            JSonView.Location = new System.Drawing.Point(12, 28);
+            JSonView.Size = new System.Drawing.Size(776, 410);
 
+            DataGridViewTextBoxColumn timeHead = new DataGridViewTextBoxColumn();
+            timeHead.Name = "time";
+            timeHead.DataPropertyName = "time";
+            timeHead.HeaderText = "time";
+            timeHead.Width = 200;
+
+            JSonView.Columns.Add(timeHead);
+            DataGridViewTextBoxColumn msgHead = new DataGridViewTextBoxColumn();
+            msgHead.Name = "msg";
+            msgHead.DataPropertyName = "msg";
+            msgHead.HeaderText = "msg";
+            msgHead.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            JSonView.Columns.Add(msgHead);
+
+            JSonView.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            this.Controls.Add(JSonView);
+            #endregion
 
             ConfigFile = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetAssembly(typeof(Form1)).Location),
@@ -259,7 +286,8 @@ namespace BriefTail
         {
             if (JSonModule)
             {
-                text = AnalyzeJson(text);
+                ShowJson(text);
+                return;
             }
             bool find = false;
             foreach (string key in HighlightDict.Keys)
@@ -344,22 +372,41 @@ namespace BriefTail
         private void JSonModuleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             JSonModule = (sender as ToolStripMenuItem).Checked = !(sender as ToolStripMenuItem).Checked;
+            if (JSonModule)
+            {
+                TailBox.Visible = false;
+                JSonView.Visible = true;
+            }
+            else
+            {
+                TailBox.Visible = true;
+                JSonView.Visible = false;
+            }
+            ShowFile();
         }
 
-        private string AnalyzeJson(string src)
+        private void ShowJson(string src)
         {
-            string result;
             try
             {
                 JToken token = JToken.Parse(src);
-                result = token.Value<string>("timestamp") + " " + token.Value<string>("message");
+                DataGridViewRow row = new DataGridViewRow();
+
+                DataGridViewTextBoxCell timestamp = new DataGridViewTextBoxCell();
+                timestamp.Value = token.Value<string>("timestamp");
+                row.Cells.Add(timestamp);
+
+                DataGridViewTextBoxCell message = new DataGridViewTextBoxCell();
+                message.Value = token.Value<string>("message");
+                row.Cells.Add(message);
+
+                JSonView.Rows.Add(row);
             }
             catch (Exception e)
             {
                 System.Console.WriteLine(e);
-                result = src;
             }
-            return result;
+            return;
         }
     }
 }

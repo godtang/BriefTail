@@ -25,6 +25,7 @@ namespace BriefTail
         private string ConfigFile = "";
         private SynchronizationContext context_;
         System.Windows.Forms.Timer RefreshTimer = new System.Windows.Forms.Timer();
+        private bool JSonModule = false;
 
         public Form1()
         {
@@ -256,6 +257,10 @@ namespace BriefTail
 
         private void AppendText(string text)
         {
+            if (JSonModule)
+            {
+                text = AnalyzeJson(text);
+            }
             bool find = false;
             foreach (string key in HighlightDict.Keys)
             {
@@ -334,6 +339,27 @@ namespace BriefTail
         private void ClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TailBox.Clear();
+        }
+
+        private void JSonModuleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            JSonModule = (sender as ToolStripMenuItem).Checked = !(sender as ToolStripMenuItem).Checked;
+        }
+
+        private string AnalyzeJson(string src)
+        {
+            string result = "";
+            try
+            {
+                JToken token = JToken.Parse(src);
+                result = token.Value<string>("timestamp") + " " + token.Value<string>("message");
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e);
+                result = src;
+            }
+            return result;
         }
     }
 }

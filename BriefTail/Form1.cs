@@ -403,6 +403,7 @@ namespace BriefTail
                 row.Cells.Add(message);
 
                 JSonView.Rows.Add(row);
+                JSonView.FirstDisplayedScrollingRowIndex = JSonView.Rows.Count - 1;
             }
             catch (Exception e)
             {

@@ -345,6 +345,7 @@ namespace BriefTail
 
         private void SaveConfig()
         {
+            ConfigRoot["highlight"] = new JObject();
             foreach (var item in HighlightDict)
             {
                 ConfigRoot["highlight"][item.Key] = item.Value.ToArgb();
